@@ -111,12 +111,12 @@ jQuery(document).ready(function( $ ){
 		{
 			var $elem = jQuery(String(elem));
 			
-			if ($elem.hasClass('loaded')) {
+			if ($elem.hasClass('inline-comments-loaded')) {
 				//console.log($elem+'already loaded');
 				return false;
 				} 
 			else {
-				$elem.addClass('loaded');
+				$elem.addClass('inline-comments-loaded');
 				console.log('Load comments for '+$elem);
 				console.log('post id: '+$elem.attr('data-id'));
 				inline_comments_ajax_load($elem.attr('data-id'))
