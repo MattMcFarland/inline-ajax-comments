@@ -104,7 +104,7 @@ jQuery(document).ready(function( $ ){
 	  }
 	});
 
-	$(document).on('scroll', function (e) {
+	$(window).on('scroll.inline-ajax-comments', function (e) {
 		var elem = isScrolledIntoView('.inline-comments-ajax-start')
 		
 		if (elem)
@@ -123,7 +123,7 @@ jQuery(document).ready(function( $ ){
 				}
 				
 		}
-	
+		
 	});
 
 	
