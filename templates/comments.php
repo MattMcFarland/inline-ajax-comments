@@ -26,6 +26,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 ?>
 
 <noscript>JavaScript is required to load the comments.</noscript>
+<div class ="inline-comments-ajax-start" data-id="<?php echo $post->ID; ?>" ></div>
 <div class="inline-comments-container" id="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
     <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" id="inline_comments_ajax_handle" class="inline_comments_ajax_handle last-child" data-post_id="<?php echo $post->ID; ?>">
     <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
@@ -58,11 +59,14 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     <?php endif; ?>
 	</div>
 </div>
-<script class="inline-comments-script" >
-	console.log ('<?php echo $post->ID; ?>' + 'has loaded...');
+<script id="inline-comments-script-<?php echo $post->ID; ?>" class="inline-comments-script" >
+/*
+	//console.log ('<?php echo $post->ID; ?>' + 'has loaded...');
 	var tid_<?php echo $post->ID; ?> = setInterval( function () {
     if ( document.readyState !== 'complete' ) return;
 		clearInterval( tid_<?php echo $post->ID; ?> );
+		//console.log ('running script for post id: <?php echo $post->ID; ?>');
 		inline_comments_ajax_load(<?php echo $post->ID; ?>)
 	}, 100 );
+	*/
 </script>

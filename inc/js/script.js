@@ -104,18 +104,32 @@ jQuery(document).ready(function( $ ){
 	  }
 	});
 
+	$(document).on('scroll', function (e) {
+		var elem = isScrolledIntoView('.inline-comments-ajax-start')
+		
+		if (elem)
+		{
+			var $elem = jQuery(String(elem));
+			
+			if ($elem.hasClass('loaded')) {
+				//console.log($elem+'already loaded');
+				return false;
+				} 
+			else {
+				$elem.addClass('loaded');
+				console.log('Load comments for '+$elem);
+				console.log('post id: '+$elem.attr('data-id'));
+				inline_comments_ajax_load($elem.attr('data-id'))
+				}
+				
+		}
+	
+	});
 
-	 /*
-    $( document ).on('keypress', '#default_add_comment_form textarea, #default_add_comment_form input', function( event ){
-        if ( event.keyCode == '13' ) {
-            event.preventDefault();
-            $(this).submit();
-        }
-    });
-*/
+	
 
     window.inline_comments_ajax_load = function(post_id){
-		console.log("load comments for post "+post_id+"...");
+		//console.log("load comments for post "+post_id+"...");
         if ( $( '#inline_comments_ajax_handle_'+post_id ).length ) {
             $( '.inline-comments-loading-icon').show();
 
@@ -183,38 +197,25 @@ jQuery(document).ready(function( $ ){
         $('#inline-comments-more-container_'+post_id).toggle();
     }
 	*/
-});
-
-
-// BETA: If newly loaded Ajax content has javascript then execute.
-// This helps inline-ajax-comments work if loaded by something like Infinite Scroll.
-// You MUST run this callback after ajax success. see jQuery docs.
-
-function ajaxLoadedCallback() {
-    scriptx = document.getElementsByTagName("script");
-
-
-    scripts = new Array();
-    for (var idx=0; idx<scriptx.length; idx++) {
-
-		if (jQuery(scriptx[idx]).is(".inline-comments-script")) {
-			scripts.push(scriptx[idx].innerHTML);
-		}
-
+	
+	window.isScrolledIntoView = function(elem) {
+		var docViewTop = $(window).scrollTop();
+		var docViewBottom = docViewTop + $(window).height();
+		var elemInView = false;
+		$( elem ).each(function() {
+			$this = $(this);
+			
+			elemTop = $this.offset().top;
+			elemBottom = elemTop + $this.height();
+			if ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) {
+				
+				elemInView = $this.attr('data-id');
+			}
+		});
+		//if (elemInView) console.log(elemInView+ " is in view!!!!");
+		if (elemInView)	return elem+'[data-id="'+elemInView+'"]';
+	
 	}
-
-      // execute each script in turn
-      for(idx=0; idx<scripts.length; ++idx) {
-		var content = scripts[idx];
-	        if (content.length) {
-	            try {
-              // create a function for the script & execute it
-              f = new Function(content);
-              f();
-            } catch(se) {
-
-            } // end try-catch
-         } // end if
-      } // end for
-
-}
+	
+	
+});
