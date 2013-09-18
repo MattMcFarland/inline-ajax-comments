@@ -62,6 +62,8 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+* Bug: Fixed "keep on" setting
+
 = 1.2.5m =
 * Fix: Works when ajax loaded (by infinite scroll)
 * Enhance: use sliding effect on more/less
