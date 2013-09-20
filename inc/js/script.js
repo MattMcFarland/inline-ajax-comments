@@ -28,8 +28,10 @@ jQuery(document).ready(function( $ ){
                 if (typeof params.callback === "function") {
                     params.callback();
                 }
+				return false;
             }
         });
+		return false;
     }
 
     /**
@@ -76,9 +78,10 @@ jQuery(document).ready(function( $ ){
                     "template": $( '#inline_comments_ajax_handle' ).attr( 'data-template' ),
                     "post_id": post_id,
                     "security": $( 'inline_comments_nonce_' +post_id).val()
-                }, false );
+                } );
                 $('textarea').val('');
                 $this.css('opacity','1');
+				return false;
             },
 			fail: function(){
 				console.log("ajax failed");
@@ -129,6 +132,8 @@ jQuery(document).ready(function( $ ){
 	
 
     window.inline_comments_ajax_load = function(post_id){
+		console.log (window.scrollY);
+		
 		//console.log("load comments for post "+post_id+"...");
         if ( $( '#inline_comments_ajax_handle_'+post_id ).length ) {
             $( '.inline-comments-loading-icon').show();
@@ -144,23 +149,34 @@ jQuery(document).ready(function( $ ){
             $.ajax({
                 data: data,
                 success: function( msg ){
-                    $( '.inline-comments-loading-icon').fadeOut();
+					console.log (window.scrollY);
+					var position = (window.scrollY);
+                    $( '#inline-comments-loading-icon-'+post_id).fadeTo( 1000, 0 );
+					
 					$( "#inline_comments_ajax_target_"+post_id).fadeIn().html( msg ); // Give a smooth fade in effect
+					$('html, body').animate({
+						scrollTop: position
+					},0);
                     if ( location.hash ){
+						debugger;
                         $('html, body').animate({
-                            scrollTop: $( location.hash ).offset().top
+							scrollTop: $( location.hash ).offset().top
                         });
                         $( location.hash ).addClass( 'inline-comments-highlight' );
                     }
+					console.log (window.scrollY);
+					return false;
                 }
             });
 
             $( document ).on('click', '.inline-comments-time-handle', function( e ){
+				event.preventDefault();
                 $( '.inline-comments-content' ).removeClass('inline-comments-highlight')
                 comment_id = '#comment-' + $( this ).attr('data-comment_id');
                 $( comment_id ).addClass('inline-comments-highlight');
             });
         }
+		return false;
     }
 
 	$( document ).on('click','.inline-comments-more-handle', function( e ){

@@ -30,10 +30,10 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 <div class="inline-comments-container" id="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
     <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" id="inline_comments_ajax_handle" class="inline_comments_ajax_handle last-child" data-post_id="<?php echo $post->ID; ?>">
     <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
-    <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
+    <div id="inline-comments-loading-icon-<?php echo $post->ID; ?>"class="inline-comments-loading-icon">Loading Comments&#8230;</div>
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
     <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
-        <div class="inline-comments-content inline-comments-content-comment-fields">
+        <div class="inline-comments-content inline-comments-content-comment-fields" id="inline-comments-content-<?php echo $post->ID; ?>">
             <div class="inline-comments-p">
                 <form action="javascript://" method="POST" id="default_add_comment_form-<?php echo $post->ID; ?>" class="default-add-comment-form">
                     <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce_'.$post->ID); ?>" id="inline_comments_nonce_<?php echo $post->ID; ?>" />
