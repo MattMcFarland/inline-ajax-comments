@@ -221,7 +221,7 @@ jQuery(document).ready(function( $ ){
 		$( elem ).each(function() {
 			$this = $(this);
 			
-			elemTop = $this.offset().top;
+			elemTop = $this.offset().top-600;
 			elemBottom = elemTop + $this.height();
 			if ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) {
 				
