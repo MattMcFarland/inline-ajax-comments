@@ -196,6 +196,7 @@ jQuery(document).ready(function( $ ){
         }
 			$( this ).toggleClass('inline-comments-more-open_'+post_id);
 			$('#inline-comments-more-container_'+post_id).toggle();
+			$('#comment_'+post_id).focus();
 	});
 
 

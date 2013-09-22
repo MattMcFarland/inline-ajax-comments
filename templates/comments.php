@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     $keep_open = get_option('keep_open');
     $custom_more = get_option('custom_more');
     $more = inline_comments_options( 'custom_more', empty( $custom_more ) ? 'default' : $custom_more );
-
+	
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
         $user_name = $current_user->display_name;
