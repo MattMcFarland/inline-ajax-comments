@@ -222,7 +222,7 @@ jQuery(document).ready(function( $ ){
 		$( elem ).each(function() {
 			$this = $(this);
 			
-			elemTop = $this.offset().top-600;
+			elemTop = $this.offset().top-50;
 			elemBottom = elemTop + $this.height();
 			if ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) {
 				
