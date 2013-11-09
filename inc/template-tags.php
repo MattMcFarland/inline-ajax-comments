@@ -164,7 +164,7 @@ function inline_comments_add_comment(){
 function inline_comments_load_template(){
 
     //check_ajax_referer('inline_comments_nonce', 'security');
-
+	$i=0;
     $comments = get_comments( array(
         'post_id' => (int)$_POST['post_id'],
         'number'  => 100,
@@ -176,6 +176,11 @@ function inline_comments_load_template(){
     <div class="inline-comments-container" id="comments_target">
         <?php if ( $comments ) : foreach( $comments as $comment) : ?>
             <?php
+            $i++;
+            if ($i==10) {
+				echo do_shortcode('[inline-ad]');
+				$i=0;
+			}
             $user = new WP_User( $comment->user_id );
             $class = null;
             if ( ! empty( $user->roles ) && is_array( $user->roles ) ) {
@@ -189,6 +194,7 @@ function inline_comments_load_template(){
             <div class="inline-comments-content inline-comments-<?php echo $class; ?>" id="comment-<?php echo $comment->comment_ID; ?>">
                 <div class="inline-comments-p">
                     <?php inline_comments_profile_pic( $comment->comment_author_email ); ?>
+					
                     <?php print $comment->comment_content; ?><br />
                     <time class="meta">
                         <strong><?php $user = get_user_by('login', $comment->comment_author ); if ( ! empty( $user->user_url ) ) : ?><a href="<?php print $user->user_url; ?>" target="_blank"><?php print $comment->comment_author; ?></a><?php else : ?><?php print $comment->comment_author; ?><?php endif; ?></strong>

@@ -34,13 +34,23 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
     <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
         <div class="inline-comments-content inline-comments-content-comment-fields" id="inline-comments-content-<?php echo $post->ID; ?>">
-            <div class="inline-comments-p">
-                <form action="javascript://" method="POST" id="default_add_comment_form-<?php echo $post->ID; ?>" class="default-add-comment-form">
+            <div class="inline-comments-p row">
+                <form action="" method="POST" id="default_add_comment_form-<?php echo $post->ID; ?>" class="default-add-comment-form form-horizontal">
                     <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce_'.$post->ID); ?>" id="inline_comments_nonce_<?php echo $post->ID; ?>" />
                     <?php inline_comments_profile_pic(); ?>
-                    <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment_<?php echo $post->ID; ?>" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
-                    <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#"><?php echo $more['more']; ?></a></span>
+						<div class="form-group">
+							<div class="col-xs-6 col-sm-8" style="padding-right:0;">
+								<textarea placeholder="Say something..." tabindex="4" id="comment_<?php echo $post->ID; ?>" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
+							</div>
+							<div class="col-xs-2" style="padding-left:0;">
+									<input class="btn btn-s btn-primary pull-left" type="submit" value="submit" />
+							</div>
+							<div style="display:none;">
+								<span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a class="btn btn-s btn-primary" href="#"><?php echo $more['more']; ?></a></span>
+							</div>
+						</div>
                     <div id = "inline-comments-more-container_<?php echo $post->ID; ?>" class="inline-comments-more-container" <?php if ( $user_email != null && isset( $keep_open ) && $keep_open != "on" ) : ?>style="display: none;"<?php endif; ?>>
+					
                         <div id="inline-comments-allowed-tags-container_<?php echo $post->ID; ?>" class="inline-comments-allowed-tags-container">
                             Allowed <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
                             <code>&lt;a href="" title=""&gt; &lt;blockquote&gt; &lt;code&gt; &lt;em&gt; &lt;strong&gt;</code>

@@ -38,8 +38,8 @@ jQuery(document).ready(function( $ ){
      * Submit new comment, note comments are loaded via ajax
      */
      $( document ).on('submit','.default-add-comment-form',function( e ) {
-        event.preventDefault();
-
+        e.preventDefault();
+	
         var $this = $(this);
         $this.css('opacity','0.5');
 		var full_id = this.id;

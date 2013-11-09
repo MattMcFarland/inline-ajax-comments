@@ -46,8 +46,8 @@
 .inline-comments-container textarea {
     height: 32px;
     min-height: 32px;
-    width: 72%;
     resize: none;
+	width:100%;
     overflow: auto;
     vertical-align: top;
     }
@@ -86,15 +86,7 @@
     padding: 15px 0 0;
     }
 
-.inline-comments-more-handle a {
-	float:right;
-    font-weight: bold;
-    left: 5px;
-    position: relative;
-    font-size:1.44em;
-	
-	width:12%;
-    }
+
 .inline-comments-more-handle a:hover {
 		text-decoration:none;
     }
@@ -134,7 +126,6 @@
 .inline-comments-highlight {
     background: #FFFFD7;
     }
-
 
 .inline-comments-annon {}
 .inline-comments-administrator {
